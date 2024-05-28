@@ -1,0 +1,49 @@
+*{
+    background-color: #adf7b6;
+    margin: 0;
+    padding: 0;
+    font: oblique bold 100% cursive;
+}
+#titulo > h1{
+    font-size: 20px;
+}
+#tareas > ol{
+    list-style: none;
+}
+section{
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+#agregar > button{
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor:pointer;
+    background-color: #46ff5c;
+    height: 30px;
+}
+#agregar > input{
+    margin: 0px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #d8d8d8;
+    height: 30px;
+}
+.eliminar{
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0px;
+    background-color: red;
+    color: white;
+}
+.tarea{
+    display: flex;
+    flex-wrap: wrap;
+}
+.texto{
+    width: 50%;
+}
