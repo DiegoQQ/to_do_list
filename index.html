@@ -8,11 +8,11 @@
 </head>
 <body>
     <section>
-        <div id="tareas">
+        <div id="caja">
             <div id="titulo">
                 <h1>To Do List</h1>
             </div>
-            <ol>
+            <ol id="tareas">
                 <li class="tarea">
                     <div>
                         <input type="checkbox" name="" id="">
@@ -70,12 +70,14 @@
                 </li>
             </ol>
             <div id="agregar">
-                <input type="text">
-                <button class="agregar"> + Agregar Elemento </button>      
+                <input id="textoAgregar" type="text">
+                <p hidden>* El contenido es obligatorio</p>
+                <button id="agrega" class="agregar"> + Agregar Elemento </button>      
             </div>
         </div>
         
     </section>
 
+    <script src="js/script.js"></script>
 </body>
 </html>
