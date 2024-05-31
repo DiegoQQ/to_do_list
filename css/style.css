@@ -16,14 +16,14 @@ section{
     display: flex;
     justify-content: center;
 }
-#agregar > button{
+#agregar > form > button{
     border-radius: 10px;
     border: 1px solid black;
     cursor:pointer;
     background-color: #46ff5c;
     height: 30px;
 }
-#agregar > input{
+#agregar > form > input{
     margin: 0px;
     border: 1px solid black;
     border-radius: 10px;

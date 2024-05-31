@@ -1,18 +1,6 @@
 class ListaTareas{
     constructor(){
         this._lista_tareas = []
-        this.idGenerador = 0;
-        /* 
-        // el 
-        let lista = [
-            {'id': 1,
-            'tarea': 'Buscar empleo'
-            'checkbox': false},
-            {'id': 2,
-            'tarea': 'Hacer las compras'
-            'checkbox': true},
-        ]
-        */
         if (localStorage.getItem('lista_tareas')) {
             this._lista_tareas = JSON.parse(localStorage.getItem('lista_tareas'));
         }else{
@@ -28,7 +16,7 @@ class ListaTareas{
         let html = ""
         tareas.innerHTML = "";
         this._lista_tareas.forEach((valor, clave) => {
-            let checkbox = valor[1] ? "checked" : "";
+            let checkbox = valor.checkbox ? "checked" : "";
 
             // Crear el elemento <li>
             const li = document.createElement("li");
@@ -42,6 +30,8 @@ class ListaTareas{
             const checkboxInput = document.createElement("input");
             checkboxInput.type = "checkbox";
             checkboxInput.checked = checkbox === "checked"; // Suponiendo que 'checkbox' es una cadena que indica si el checkbox debe estar marcado o no
+
+            
             div1.appendChild(checkboxInput);
 
             // Agregar el primer <div> al <li>
@@ -53,7 +43,7 @@ class ListaTareas{
 
             // Crear el párrafo y establecer su contenido
             const parrafo = document.createElement("p");
-            parrafo.textContent = valor[0];
+            parrafo.textContent = valor.tarea;
             parrafo.className = checkbox === "checked" ? checkbox : ""; // Añadir la clase solo si el checkbox está marcado
             div2.appendChild(parrafo);
 
@@ -81,42 +71,41 @@ class ListaTareas{
 
             //Evento al boton eliminar
             eliminarButton.addEventListener('click', () => {
-                this.eliminartarea(clave, `tarea_${clave}`);
+                this.eliminartarea(valor.tarea, li);
             });
 
-            // html += `
-            // <li class="tarea" id="tarea_${clave}">
-            //     <div>
-            //         <input type="checkbox" ${checkbox}>
-            //     </div>
-            //     <div class="texto">
-            //         <p class="${checkbox}">${valor[0]}</p>
-            //     </div>
-            //     <div>
-            //         <input type="hidden" value="tarea_${clave}">
-            //         <button class="eliminar"> X </button>
-            //     </div>
-            // </li>
-            // `
-        tareas.appendChild(li);
+            checkboxInput.addEventListener('change', a => {
+                console.log(a);
+                if (a.target.checked) {
+                    parrafo.classList.add('checked');
+                    this._lista_tareas[clave].checkbox = true;
+                } else {
+                    parrafo.classList.remove('checked');
+                    this._lista_tareas[clave].checkbox = false;
+                }
+                this.ActualizarLocalStorage();
+            })
+
+
+            tareas.appendChild(li);
         });
     }
-    eliminartarea(id, elemento){
-        this._lista_tareas.splice(id, 1);
+    eliminartarea(tarea, elemento){
+        this._lista_tareas = this._lista_tareas.filter(tarea_lista => tarea_lista.tarea != tarea);
 
         this.ActualizarLocalStorage();
 
-        let eliminar = document.getElementById(elemento);
-        eliminar.remove();
+        elemento.remove();
     }
     crearEventos(){
         let btnAgregar = document.getElementById("agrega");
         
         btnAgregar.addEventListener("click", a => {
+            a.preventDefault();
             let elementoAgregar = document.getElementById("textoAgregar");
-            let obligatorio = document.querySelector("#agregar > p");
+            let obligatorio = document.querySelector("#agregar > form > p");
             // si no se digito el elemento muestra el mensaje de error
-            if (elementoAgregar == "") {
+            if (elementoAgregar.value.trim() === "" && this._lista_tareas) {
                 obligatorio.removeAttribute("hidden");
             }else{
                 obligatorio.setAttribute("hidden", true);
@@ -127,7 +116,10 @@ class ListaTareas{
         });
     }
     agregarArray(texto, checkbox){
-        this._lista_tareas.push([texto, checkbox])
+        this._lista_tareas.push({
+            'tarea': texto, 
+            'checkbox': checkbox
+        });
 
         this.ActualizarLocalStorage();
 
