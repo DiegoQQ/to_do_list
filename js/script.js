@@ -103,10 +103,18 @@ class ListaTareas{
         btnAgregar.addEventListener("click", a => {
             a.preventDefault();
             let elementoAgregar = document.getElementById("textoAgregar");
+            let nueva_tarea = elementoAgregar.value.trim();
             let obligatorio = document.querySelector("#agregar > form > p");
+
+
+            let tarea_repetida = this._lista_tareas.some( tarea => tarea.tarea == elementoAgregar.value);
             // si no se digito el elemento muestra el mensaje de error
-            if (elementoAgregar.value.trim() === "" && this._lista_tareas) {
+            if (nueva_tarea === "") {
                 obligatorio.removeAttribute("hidden");
+                obligatorio.textContent = "* El contenido es obligatorio";
+            }else if(tarea_repetida){
+                obligatorio.removeAttribute("hidden");
+                obligatorio.textContent = "* El contenido ya exite en la lista";
             }else{
                 obligatorio.setAttribute("hidden", true);
                 this.agregarArray(elementoAgregar.value, false);

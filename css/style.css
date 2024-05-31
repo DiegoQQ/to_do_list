@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     font: oblique bold 100% cursive;
+
+    box-sizing: border-box;
 }
 #titulo > h1{
     font-size: 20px;
