@@ -5,24 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do list</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/logo.png">
 </head>
 <body>
     <section>
-        <div id="caja">
-            <div id="titulo">
-                <h1>To Do List</h1>
-            </div>
+        <div> 
+            <h1>Lista de pendientes</h1>
             <ol id="tareas">              
             </ol>
-            <div id="agregar">
-                <form>
-                    <input id="textoAgregar" type="text">
-                    <p hidden>* El contenido es obligatorio</p>
-                    <button type="submit" id="agrega" class="agregar">Agregar Elemento</button>
-                </form>
-            </div>
+            <form id="agregar">
+                <input id="textoAgregar" type="text" placeholder="Crea tu tarea aquí..." >
+                <p class="advertencia" hidden>* El contenido es obligatorio</p>
+                <button type="submit" id="agrega" class="agregar">Agregar</button>
+            </form>
         </div>
-        
     </section>
 
     <script src="js/script.js"></script>

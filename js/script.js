@@ -75,7 +75,6 @@ class ListaTareas{
             });
 
             checkboxInput.addEventListener('change', a => {
-                console.log(a);
                 if (a.target.checked) {
                     parrafo.classList.add('checked');
                     this._lista_tareas[clave].checkbox = true;
@@ -104,7 +103,7 @@ class ListaTareas{
             a.preventDefault();
             let elementoAgregar = document.getElementById("textoAgregar");
             let nueva_tarea = elementoAgregar.value.trim();
-            let obligatorio = document.querySelector("#agregar > form > p");
+            let obligatorio = document.querySelector("#agregar > p");
 
 
             let tarea_repetida = this._lista_tareas.some( tarea => tarea.tarea == elementoAgregar.value);
